@@ -40,6 +40,7 @@ $sql = "SELECT m.id, m.message, m.timecreated, u.id AS userid, $userfields
 
 $messages = $DB->get_records_sql($sql);
 
+// Inserting a new message into database.
 if ($message) {
     require_capability('local/helloworld:postmessage', context_system::instance());
     $record = new stdClass();
@@ -52,6 +53,7 @@ if ($message) {
     $messages = $DB->get_records_sql($sql);
 }
 
+// Deleting message from database.
 if ($id && has_capability('local/helloworld:deleteanymessage', context_system::instance())) {
     require_sesskey();
 
@@ -65,82 +67,33 @@ echo $OUTPUT->header();
 // Form for creating new messages.
 if (has_capability('local/helloworld:postmessage', context_system::instance())) {
 
-    echo html_writer::start_tag('form', [
-        'method' => 'post',
-    ]);
+    $ctx = new \stdClass();
 
-    echo html_writer::tag('textarea', '', [
-        'placeholder' => get_string('entermessage', 'local_helloworld'),
-        'name' => 'message',
-        'class' => 'form-control',
-    ]);
-
-    echo html_writer::tag('br', '');
-
-    echo html_writer::tag('input', '', [
-        'type' => 'submit',
-        'value' => get_string('submit'),
-    ]);
-
-    echo html_writer::end_tag('form');
+    echo $OUTPUT->render_from_template('local_helloworld/helloworld_form', $ctx);
 }
 
-// Cards for message display.
+// Cards for displaying messages.
 if (has_capability('local/helloworld:viewmessage', context_system::instance())) {
 
-    echo html_writer::start_div('card-columns');
+    $data = new \stdClass();
 
     foreach ($messages as $message) {
-        echo html_writer::start_div('card');
-
-        echo html_writer::start_div('card-body');
-
-        echo html_writer::tag('p', $message->message, [
-            'class' => 'card-text',
-        ]);
-
-        echo html_writer::tag('footer', fullname($message), [
-            'class' => 'blockquote-footer',
-        ]);
-
-        echo html_writer::tag('footer', userdate($message->timecreated), [
-            'class' => 'blockquote-footer',
-        ]);
-
-        echo "<br>";
-
-        if (has_capability('local/helloworld:deleteanymessage', context_system::instance())) {
-            // Insert delete button.
-            echo html_writer::start_tag('form', [
-                'method' => 'post',
-            ]);
-
-            echo html_writer::empty_tag('input', [
-                'type' => 'hidden',
-                'name' => 'sesskey',
-                'value' => sesskey(),
-            ]);
-
-            echo html_writer::start_tag('button', [
-                'type' => 'submit',
-                'name' => 'deleteid',
-                'class' => 'btn btn-danger rounded',
-                'value' => $message->id,
-            ]);
-
-            echo html_writer::tag('i', get_string('delete'));
-
-            echo html_writer::end_tag('button');
-
-            echo html_writer::end_tag('form');
-        }
-
-        echo html_writer::end_div('card-body');
-
-        echo html_writer::end_div('card');
+        $message->timecreated = userdate($message->timecreated);
+        $message->fullname = fullname($message);
+        $data->messages[] = $message;
     }
 
-    echo html_writer::end_div('card-columns');
+    $data->sesskey_name = 'sesskey';
+    $data->sesskey_value = sesskey();
+    $data->delete_id = 'deleteid';
+
+    if (has_capability('local/helloworld:deleteanymessage', context_system::instance())) {
+        $data->delete = true;
+    } else {
+        $data->delete = false;
+    }
+
+    echo $OUTPUT->render_from_template('local_helloworld/helloworld_cards', $data);
 }
 
 echo $OUTPUT->footer();
