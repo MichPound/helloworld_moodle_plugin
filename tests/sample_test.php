@@ -29,7 +29,6 @@
  * @copyright   2020 Your Name
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class local_helloworld_sample_testcase extends advanced_testcase{
     public function test_creation_deletion() {
         global $DB;

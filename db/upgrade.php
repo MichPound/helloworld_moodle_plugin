@@ -28,7 +28,6 @@
  * @param int $oldversion
  * @return bool
  */
-
 function xmldb_local_helloworld_upgrade($oldversion) {
     global $CFG, $DB;
 

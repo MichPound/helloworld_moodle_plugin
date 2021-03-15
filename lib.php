@@ -30,7 +30,6 @@ defined('MOODLE_INTERNAL') || die;
  * @param navigation_node $parentnode
  * @return bool
  */
-
 function local_helloworld_extend_navigation_frontpage(navigation_node $parentnode) {
     if (get_config('local_helloworld', 'showinnavigation') == 1 && isloggedin() && !isguestuser()) {
         $parentnode->add(
