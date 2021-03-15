@@ -14,6 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @package     local_helloworld
+ * @copyright   2020 Your Name
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 class local_helloworld_sample_testcase extends advanced_testcase{
     public function test_creation_deletion() {
         global $DB;

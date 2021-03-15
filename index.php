@@ -14,6 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @package     local_helloworld
+ * @copyright   2020 Your Name
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require(__DIR__. '/../../config.php');
 
 $PAGE->set_url(new moodle_url('/local/helloworld/index.php'));
