@@ -15,9 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Keeps track of database upgrades for the plugin.
+ *
  * @package     local_helloworld
  * @copyright   2020 Your Name
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * Executes upgrade from older version given.
+ *
+ * @param int $oldversion
+ * @return bool
  */
 
 function xmldb_local_helloworld_upgrade($oldversion) {

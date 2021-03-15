@@ -15,12 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Adds link to navigate to plugin.
+ *
  * @package     local_helloworld
  * @copyright   2020 Your Name
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
+
+/**
+ * Checks admin settings and adds link to plugin in navigation.
+ *
+ * @param navigation_node $parentnode
+ * @return bool
+ */
 
 function local_helloworld_extend_navigation_frontpage(navigation_node $parentnode) {
     if (get_config('local_helloworld', 'showinnavigation') == 1 && isloggedin() && !isguestuser()) {

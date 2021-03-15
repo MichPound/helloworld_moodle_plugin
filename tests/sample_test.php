@@ -15,6 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Some basic tests for the plugin.
+ *
+ * @package     local_helloworld
+ * @copyright   2020 Your Name
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * Basic class that tests create and delete.
+ *
  * @package     local_helloworld
  * @copyright   2020 Your Name
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
